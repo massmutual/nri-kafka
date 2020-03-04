@@ -36,6 +36,13 @@
           # Only collect metrics from the bootstrap broker configured. The integration will not attempt to collect metrics
           # for any other broker, nor will it collect cluster-level metrics like topic metrics. This is useful for things
           # like deployment to kubernetes, where a single integration instance is desired per broker.
+          # In order to collect metrics from a single broker, you may need to set the KAFKA_ADVERTISED_HOST_NAME in your 
+          # deployment file to the same value as in the BOOTSTRAP_BROKER_HOST config option. E.g. using the podIP:
+          # - name: KAFKA_ADVERTISED_HOST_NAME
+          #   valueFrom:
+          #     fieldRef:
+          #       apiVersion: "v1"
+          #       fieldPath: "status.podIP"
           LOCAL_ONLY_COLLECTION: true
 
           # See above for more information on topic collection
